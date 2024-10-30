@@ -54,7 +54,7 @@ const ImageUpload = ({ fetchImages }) => {
                     <button
                         onClick={handleUpload}
                         className={`btn text-white btn-sm ${loading ? "disabled" : ""}`}
-                        style={{ backgroundColor: '#7c488f'}}
+                        style={{ backgroundColor: file ? 'green' : '#7c488f' }}
                         disabled={loading}
                     >
                         {loading ? (

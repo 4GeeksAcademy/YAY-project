@@ -138,7 +138,7 @@ export const EventosMapa = () => {
                             Ver en Lista  <i className="fa-solid fa-rectangle-list" style={{ color: '#7c488f' }}></i>
                         </button>
                     </div>
-                    <LoadScript googleMapsApiKey="AIzaSyBLVJxF33WzBypiNQ9ih1oZKX2TdEnjoeA" libraries={libraries}>
+                    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
 
                         <GoogleMap
                             ref={mapRef}

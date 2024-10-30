@@ -169,7 +169,7 @@ export const Landing_Maps = () => {
                         {/* End Nav */}
                     </div>
 
-                    <LoadScript googleMapsApiKey="AIzaSyBLVJxF33WzBypiNQ9ih1oZKX2TdEnjoeA" libraries={libraries}>
+                    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
 
                         <GoogleMap
 

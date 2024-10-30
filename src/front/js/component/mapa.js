@@ -89,7 +89,7 @@ export const Mapa = ({ setDireccion, initialDireccion }) => {
 
     return (
         <LoadScript
-            googleMapsApiKey="AIzaSyBLVJxF33WzBypiNQ9ih1oZKX2TdEnjoeA"
+        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             libraries={libraries}
             onLoad={() => setIsMapLoaded(true)}
         >
