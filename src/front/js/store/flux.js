@@ -697,7 +697,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            updateProfile: async (userId, nombre, apellidos, fecha_nacimiento, direccion, latitud, longitud, breve_descripcion, intereses) => {
+            updateProfile: async (userId, nombre, apellidos, fecha_nacimiento, direccion, latitud, longitud, breve_descripcion, telefono, genero, intereses) => {
                 try {
                     const url = `${process.env.BACKEND_URL}/api/usuarios/${userId}`;
                     console.log("URL del fetch:", url);
@@ -715,6 +715,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                             latitud,
                             longitud,
                             breve_descripcion,
+                            telefono, 
+                            genero,  
                         })
                     });
             

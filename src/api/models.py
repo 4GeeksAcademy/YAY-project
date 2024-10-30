@@ -152,10 +152,13 @@ class Usuarios(db.Model):
     breve_descripcion = db.Column(db.String(255), nullable=True)  
     direccion = db.Column(db.String(255), nullable=True) 
     latitud = db.Column(db.Float, nullable=True) 
-    longitud= db.Column(db.Float, nullable=True) 
+    longitud = db.Column(db.Float, nullable=True) 
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)  
     is_active = db.Column(db.Boolean(), default=True, nullable=False)
+    telefono = db.Column(db.String(20), nullable=True) 
+    genero = db.Column(db.String(10), nullable=True)      
+
     db.relationship('Inscripciones', backref='usuarios', lazy=True)
 
     def __repr__(self):
@@ -172,6 +175,8 @@ class Usuarios(db.Model):
             "fecha_nacimiento": self.fecha_nacimiento.strftime('%Y-%m-%d') if self.fecha_nacimiento else None,
             "breve_descripcion": self.breve_descripcion,
             "email": self.email,
+            "telefono": self.telefono, 
+            "genero": self.genero,   
             "is_active": self.is_active,
             "foto_perfil": self.foto_perfil, 
             "public_id_perfil": self.public_id_perfil

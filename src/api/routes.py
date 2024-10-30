@@ -526,13 +526,9 @@ def actualizar_usuario(user_id):
     latitud = request.json.get('latitud')
     longitud = request.json.get('longitud')
     breve_descripcion = request.json.get('breve_descripcion')
-    
+    telefono = request.json.get('telefono')  
+    genero = request.json.get('genero')     
 
-    # Validar que al menos uno de los campos es proporcionado
-    if not any([nombre, apellidos, fecha_nacimiento, direccion, latitud, longitud, breve_descripcion]):
-        return jsonify({"ERROR": "Debe proporcionar al menos un campo para actualizar"}), 400
-
-    # Actualiza los campos del usuario
     if nombre:
         usuario.nombre = nombre
     if apellidos:
@@ -547,6 +543,10 @@ def actualizar_usuario(user_id):
         usuario.longitud = longitud
     if breve_descripcion:
         usuario.breve_descripcion = breve_descripcion
+    if telefono:  
+        usuario.telefono = telefono
+    if genero:  
+        usuario.genero = genero
 
     try:
         db.session.commit()
@@ -836,6 +836,8 @@ def update_usuario(usuario_id):
     latitud = request.json.get('latitud')
     longitud = request.json.get('longitud')
     breve_descripcion = request.json.get('breve_descripcion')
+    telefono = request.json.get('telefono')  
+    genero = request.json.get('genero')   
     foto = request.files.get('foto')
     
     # Actualizar la información del usuario
@@ -853,6 +855,10 @@ def update_usuario(usuario_id):
         usuario.longitud = longitud
     if breve_descripcion:
         usuario.breve_descripcion = breve_descripcion
+    if telefono:  
+        usuario.telefono = telefono
+    if genero:  
+        usuario.genero = genero
     
     # Actualizar la imagen de perfil
     if foto:
