@@ -78,5 +78,5 @@ $ pipenv run downgrade
 
 <img src="https://github.com/user-attachments/assets/da7fe0b2-10b7-441c-8f68-7ddd2d31ada9" alt="star" style="vertical-align:middle; margin:2px; opacity:0.75; height:20px"> &nbsp; If you liked what you saw, give me a star. 
 
-<img src="https://github.com/user-attachments/assets/cfbf1a7e-fe7c-4a41-bc3d-1b095838a332" alt="speak" style="vertical-align:middle; margin:2px; opacity:0.75; height:20px"> &nbsp; If you want to work with me, feel free to ping me on [LinkedIn](https://www.linkedin.com/in/davinia-p-delgado).
+<img src="https://github.com/user-attachments/assets/cfbf1a7e-fe7c-4a41-bc3d-1b095838a332" alt="speak" style="vertical-align:middle; margin:2px; opacity:0.75; height:20px"> &nbsp; If you want to work with me, feel free to ping us on LinkedIn: [Davinia](https://www.linkedin.com/in/davinia-p-delgado)  |  [Gabriel](https://www.linkedin.com/in/gabriel-viscio-redondo-bb4568314)  |  [David](https://www.linkedin.com/in/david-nieto-grillo-a91839287/)
 
