@@ -1,15 +1,40 @@
-# WebApp boilerplate with React JS and Flask API
+# YAY  |  Haz de tu barrio un Hogar
+## Introduction
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+<img align="right" alt="GIF" src="https://i.ibb.co/9ZXQWRY/logoYAY.png" width="50%" height="50%" style="vertical-align:middle"/>
 
-- Documentation can be found here: https://start.4geeksacademy.com/starters/react-flask
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to heroku [in just a few steps here](https://start.4geeksacademy.com/backend/deploy-heroku-posgres).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
 
-### 1) Installation:
+- _¿Qué es YAY?_ Plataforma web con eventos locales para mayores de 60 años.
+- _¿Objetivo?_ YAY busca una mejora en la calidad de vida de este colectivo.
+- _¿Por qué?_ La plataforma ofrece una solución accesible para combatir la soledad del grupo objetivo.
+- _¿Cómo?_ A través de eventos en su zona que conectan a los usuarios con su comunidad local sin necesidad de grandes desplazamientos.
+
+YAY busca un cambio en la vida de las personas mayores de 60 que facilite la creación de nuevas amistades, sin la necesidad de desplazarse largas distancias. Los usuarios pueden conocer a personas con intereses similares en su barrio, participando en los eventos creados por nuestros partners.
+
+Con un enfoque no romántico y un diseño accesible, queremos ayudar a combatir la soledad y mejorar la calidad de vida de este sector de la sociedad. Además, ¿qué mejor momento para romper el hielo que haciendo algo que te gusta?
+
+
+<img align="left" src="https://i.ibb.co/VVdhpnr/Captura-de-Pantalla-2024-10-29-a-las-14-08-45.png" alt="landing" width="31%" style="vertical-align:middle"/><img align="center" alt="landing2" src="https://i.ibb.co/64jQT6j/Captura-de-Pantalla-2024-10-29-a-las-14-08-57.png" width="31%" style="vertical-align:middle"/><img align="right" alt="landing3" src="https://i.ibb.co/VJxmdH0/Captura-de-Pantalla-2024-10-29-a-las-14-09-29.png" width="31%" style="vertical-align:middle"/>
+
+## Tech
+#### Backend
+- _Python_ - Backend programming language
+- _Flask_ - Python backend
+- _SQLAlchemy_ - ORM para manejar bases de datos en Flask
+#### Frontend
+- _React_ - Frontend framework in JavaScript
+- _Flux_ - Architecture pattern for data management in React
+- _Context API_ - React store for global state management
+- _JavaScript_ - Language for the frontend alongside React
+- _HTML_ - Frontend structure
+- _CSS_ - Frontend styles
+#### Deployment
+- _render.com_ - Hosting and deployment platform
+- _Aiven_ - Service for databases in the cloud
+- _PostgreSQL with pgAdmin_ - Database used in Aiven
+
+
+## Installation
 
 > If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
 
@@ -39,29 +64,6 @@ You are also able to undo a migration by running
 $ pipenv run downgrade
 ```
 
-### Backend Populate Table Users
-
-To insert test users in the database execute the following command:
-
-```sh
-$ flask insert-test-users 5
-```
-
-And you will see the following message:
-
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
-
-### **Important note for the database and the data inside it**
-
-Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing ```commands.py``` file inside ```/src/api``` folder. Edit line 32 function ```insert_test_data``` to insert the data according to your model (use the function ```insert_test_users``` above as an example). Then, all you need to do is run ```pipenv run insert-test-data```.
 
 ### Front-End Manual Installation:
 
@@ -70,12 +72,11 @@ Every Github codespace environment will have **its own database**, so if you're 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
 
-## Publish your website!
+## Development
 
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
+<img src="https://github.com/user-attachments/assets/5bf22aae-eecf-4f77-8163-01429c2a2865" alt="pc" style="vertical-align:middle; margin:2px; opacity:0.75; height:22px"> All suggestions and contributions are welcome.
 
-### Contributors
+<img src="https://github.com/user-attachments/assets/da7fe0b2-10b7-441c-8f68-7ddd2d31ada9" alt="star" style="vertical-align:middle; margin:2px; opacity:0.75; height:20px"> &nbsp; If you liked what you saw, give me a star. 
 
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
+<img src="https://github.com/user-attachments/assets/cfbf1a7e-fe7c-4a41-bc3d-1b095838a332" alt="speak" style="vertical-align:middle; margin:2px; opacity:0.75; height:20px"> &nbsp; If you want to work with me, feel free to ping me on [LinkedIn](https://www.linkedin.com/in/davinia-p-delgado).
 
-You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
