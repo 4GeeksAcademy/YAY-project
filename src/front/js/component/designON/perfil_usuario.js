@@ -98,6 +98,8 @@ export const Perfil_Usuario = () => {
     const [alertMessage, setAlertMessage] = useState('');
 
     const [direccionActual, setDireccionActual] = useState('');
+    const [latitudActual, setLatitudActual] = useState(null);
+    const [longitudActual, setLongitudActual] = useState(null);
 
     useEffect(() => {
         const idToUse = userId || localStorage.getItem("userId") || store.user_id;
@@ -107,6 +109,8 @@ export const Perfil_Usuario = () => {
                     if (data) {
                         setProfile({ ...data, latitud: data.latitud || null, longitud: data.longitud || null });
                         setDireccionActual(data.direccion);
+                        setLatitudActual(data.latitud);
+                        setLongitudActual(data.longitud);
                         setMisIntereses(data.intereses.map(i => i.id));
                     }
                 }).catch(error => console.error("Error al obtener el perfil:", error));
@@ -256,6 +260,22 @@ export const Perfil_Usuario = () => {
         }
     };
 
+    const handleDireccionChange = (direccion, lat, lng) => {
+        setDireccionActual(direccion);
+        setLatitudActual(lat);
+        setLongitudActual(lng);
+        setProfile(prev => ({ ...prev, direccion, latitud: lat, longitud: lng }));
+    };
+
+    const handleSectionChange = (section) => {
+        setActiveSection(section);
+        if (section === "informacionPersonal") {
+            setLatitudActual(profile.latitud || null);
+            setLongitudActual(profile.longitud || null);
+            setDireccionActual(profile.direccion || '');
+        }
+    };
+
     return (
         <>
             <main className="profile-container">
@@ -272,15 +292,45 @@ export const Perfil_Usuario = () => {
                             <hr className="my-1"></hr>
                             <p className="profile-email fs-5 mt-0">{profile.email}</p>
                             <nav className="profile-nav">
-                                <button className="nav-link" onClick={() => setActiveSection("informacionPersonal")}>Información personal</button>
-                                <button className="nav-link active" onClick={() => setActiveSection("misIntereses")}>Mis Intereses</button>
-                                <button className="nav-link" onClick={() => setActiveSection("misEventos")}>Mis Eventos</button>
-                                <button className="nav-link" onClick={() => setActiveSection("misFotos")}>Mis Fotos</button>
-                                <button className="nav-link" onClick={() => setActiveSection("seguridad")}>Seguridad</button>
-                                <button className="nav-link" onClick={() => setActiveSection("notificaciones")}>Notificaciones</button>
+                                <button
+                                    className={`nav-link ${activeSection === "informacionPersonal" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("informacionPersonal")}
+                                >
+                                    Información personal
+                                </button>
+                                <button
+                                    className={`nav-link ${activeSection === "misIntereses" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("misIntereses")}
+                                >
+                                    Mis Intereses
+                                </button>
+                                <button
+                                    className={`nav-link ${activeSection === "misEventos" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("misEventos")}
+                                >
+                                    Mis Eventos
+                                </button>
+                                <button
+                                    className={`nav-link ${activeSection === "misFotos" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("misFotos")}
+                                >
+                                    Mis Fotos
+                                </button>
+                                <button
+                                    className={`nav-link ${activeSection === "seguridad" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("seguridad")}
+                                >
+                                    Seguridad
+                                </button>
+                                <button
+                                    className={`nav-link ${activeSection === "notificaciones" ? "active" : ""}`}
+                                    onClick={() => handleSectionChange("notificaciones")}
+                                >
+                                    Notificaciones
+                                </button>
                             </nav>
                         </div>
-                        <UserInterest intereses={misIntereses} /> 
+                        <UserInterest intereses={misIntereses} />
                     </aside>
 
                     <section className="profile-details">
@@ -402,11 +452,10 @@ export const Perfil_Usuario = () => {
                                         <div className="form-group">
                                             <label className="fs-5">Dirección</label>
                                             <Mapa
-                                                setDireccion={(direccion, lat, lng) => {
-                                                    setDireccionActual(direccion);
-                                                    setProfile(prev => ({ ...prev, direccion, latitud: lat, longitud: lng }));
-                                                }}
-                                                initialDireccion={profile.direccion}
+                                                setDireccion={handleDireccionChange}
+                                                initialDireccion={direccionActual}
+                                                latitud={latitudActual}
+                                                longitud={longitudActual}
                                             />
                                         </div>
 

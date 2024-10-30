@@ -4,34 +4,43 @@ import { CustomMarkerMapa } from './customMarkerMapa';
 
 const libraries = ["places", "geometry"];
 
-export const Mapa = ({ setDireccion, initialDireccion }) => {
+export const Mapa = ({ setDireccion, initialDireccion, latitud, longitud }) => {
     const [autocomplete, setAutocomplete] = useState(null);
-    const [address, setAddress] = useState('');
-    const [markerPosition, setMarkerPosition] = useState(initialDireccion || { lat: 41.39124311587592, lng: 2.1558980676717767 });
-    const [center, setCenter] = useState(initialDireccion || { lat: 41.39124311587592, lng: 2.1558980676717767 });
+    const [address, setAddress] = useState(initialDireccion || '');
+    const [markerPosition, setMarkerPosition] = useState({ lat: latitud || 41.39124311587592, lng: longitud || 2.1558980676717767 });
+    const [center, setCenter] = useState({ lat: latitud || 41.39124311587592, lng: longitud || 2.1558980676717767 });
     const [isMapLoaded, setIsMapLoaded] = useState(false);
 
     const mapRef = React.useRef();
 
     useEffect(() => {
-        if (initialDireccion) {
+        if (isMapLoaded && window.google) {
             const geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ address: initialDireccion }, (results, status) => {
-                if (status === 'OK' && results[0]) {
-                    const location = results[0].geometry.location;
-                    const newPosition = {
-                        lat: location.lat(), 
-                        lng: location.lng()
-                    };
-                    setMarkerPosition(newPosition);
-                    setCenter(newPosition);
-                    setAddress(initialDireccion);
-                } else {
-                    console.error("Geocoding failed: " + status);
-                }
-            });
+
+            if (latitud != null && longitud != null) {
+                const newPosition = { lat: latitud, lng: longitud };
+                setMarkerPosition(newPosition);
+                setCenter(newPosition);
+                geocoder.geocode({ location: newPosition }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        setAddress(results[0].formatted_address);
+                    }
+                });
+            } else if (initialDireccion) {
+                geocoder.geocode({ address: initialDireccion }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        const location = results[0].geometry.location;
+                        const newPosition = { lat: location.lat(), lng: location.lng() };
+                        setMarkerPosition(newPosition);
+                        setCenter(newPosition);
+                        setAddress(initialDireccion);
+                    } else {
+                        console.error("Geocoding failed: " + status);
+                    }
+                });
+            }
         }
-    }, [initialDireccion]);
+    }, [initialDireccion, latitud, longitud, isMapLoaded]);
 
     const onPlaceChanged = () => {
         if (autocomplete) {
@@ -60,21 +69,21 @@ export const Mapa = ({ setDireccion, initialDireccion }) => {
             lat: event.latLng.lat(),
             lng: event.latLng.lng()
         };
-        setMarkerPosition(newPosition);
-        setCenter(newPosition);
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({ location: newPosition }, (results, status) => {
             if (status === 'OK' && results[0]) {
                 const formattedAddress = results[0].formatted_address;
-                setAddress(formattedAddress); // Actualiza el estado del input
-                setDireccion(formattedAddress, newPosition.lat, newPosition.lng); // Llama a setDireccion
+                setMarkerPosition(newPosition);
+                setCenter(newPosition);
+                setAddress(formattedAddress);
+                setDireccion(formattedAddress, newPosition.lat, newPosition.lng);
             }
         });
     };
 
     const mapContainerStyle = {
         height: "400px",
-        with: 'auto',
+        width: 'auto',
         maxWidth: "800px",
         cursor: 'pointer'
     };
@@ -86,47 +95,47 @@ export const Mapa = ({ setDireccion, initialDireccion }) => {
         }
     };
 
-
     return (
         <LoadScript
-        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             libraries={libraries}
-            onLoad={() => setIsMapLoaded(true)}
+            onLoad={() => setIsMapLoaded(true)} // Esto se ejecuta cuando se carga el script de Google Maps
         >
-             {isMapLoaded && ( 
-            <GoogleMap
-                ref={mapRef}
-                mapContainerStyle={mapContainerStyle}
-                center={center}
-                zoom={15}
-                onClick={onMapClick} 
-            >
-                <Autocomplete
-                    onLoad={autocomplete => setAutocomplete(autocomplete)}
-                    onPlaceChanged={onPlaceChanged}
+            {isMapLoaded && (
+                <GoogleMap
+                    ref={mapRef}
+                    mapContainerStyle={mapContainerStyle}
+                    center={center}
+                    zoom={15}
+                    onClick={onMapClick}
                 >
-                    <input
-                    className='w-75 fs-5'
-                        type="text"
-                        placeholder="Introduzca su dirección..."
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        onKeyDown={handleKeyPress}
-                        style={{
-                            position: 'absolute',
-                            top: '50px',
-                            left: '10px',
-                            zIndex: 1,
-                            padding: '10px',
-                            width: '300px'
-                        }}
-                    />
-                </Autocomplete>
-                <CustomMarkerMapa position={markerPosition}
-                />
-
-            </GoogleMap>
-                )}
+                    <Autocomplete
+                        onLoad={autocomplete => setAutocomplete(autocomplete)}
+                        onPlaceChanged={onPlaceChanged}
+                    >
+                        <input
+                            className='w-75 fs-5'
+                            type="text"
+                            placeholder="Introduzca su dirección..."
+                            value={address}
+                            onChange={(e) => {
+                                setAddress(e.target.value);
+                                setDireccion(e.target.value, null, null);
+                            }}
+                            onKeyDown={handleKeyPress}
+                            style={{
+                                position: 'absolute',
+                                top: '50px',
+                                left: '10px',
+                                zIndex: 1,
+                                padding: '10px',
+                                width: '300px'
+                            }}
+                        />
+                    </Autocomplete>
+                    <CustomMarkerMapa position={markerPosition} />
+                </GoogleMap>
+            )}
         </LoadScript>
     );
 };

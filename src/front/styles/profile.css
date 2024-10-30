@@ -1,4 +1,3 @@
-
 .profile-container {
     background-color: #f8f9fa;
     padding: 20px;
@@ -14,11 +13,12 @@
 .profile-content {
     display: flex;
     margin-top: 20px;
+    flex-wrap: wrap; /* Mover aquí para que se aplique siempre */
 }
 
 .profile-sidebar {
-    width: 25%;
-    margin-right: 20px;
+    flex-basis: 300px; /* Definido aquí para evitar duplicación */
+    margin-right: 20px; /* Espacio entre sidebar y contenido */
 }
 
 .profile-card {
@@ -67,7 +67,6 @@
 .gender-options {
     display: flex;
     gap: 15px;
-
 }
 
 .btn {
@@ -75,7 +74,6 @@
     border: none;
     border-radius: 5px;
 }
-
 
 .btn-save {
     background-color: #007bff;
@@ -90,4 +88,18 @@
 .delete-account {
     background-color: #fff3f3;
     border: 1px solid #dc3545;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .profile-sidebar {
+        flex-basis: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-nav {
+        flex-wrap: wrap;
+    }
 }
