@@ -90,12 +90,15 @@ export const Perfil_Usuario = () => {
     });
 
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [deleteCheckboxChecked, setDeleteCheckboxChecked] = useState(false);
     const [interesesSeleccionados, setInteresesSeleccionados] = useState(new Set());
     const [misIntereses, setMisIntereses] = useState([]); // Lista de intereses seleccionados
     const [interesesDisponibles, setInteresesDisponibles] = useState([]);
     const [activeSection, setActiveSection] = useState("informacionPersonal");
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    
 
     const [direccionActual, setDireccionActual] = useState('');
     const [latitudActual, setLatitudActual] = useState(null);
@@ -177,15 +180,20 @@ export const Perfil_Usuario = () => {
             setTimeout(() => setShowAlert(false), 5000);
         }
     };
+
     const confirmDeleteAccount = () => {
-        actions.deleteAccount(userId)
-            .then(() => {
-                navigate('/logout');  // Redirigir al usuario a la página de logout
-            })
-            .catch((error) => {
-                console.error("Error al eliminar la cuenta:", error);
-            });
+        setAlertMessage("Cuenta eliminada con éxito.");
+        setShowAlert(true); 
+        setTimeout(() => {
+            navigate("/logout", { state: { from: true } });
+        }, 2500);
     };
+
+
+    const handleCheckboxChange = (event) => {
+        setDeleteCheckboxChecked(event.target.checked);
+    };
+
 
     const handleCancel = () => {
         setActiveSection("informacionPersonal");
@@ -473,17 +481,6 @@ export const Perfil_Usuario = () => {
                                     </form>
                                 </div>
 
-                                <div className="profile-card delete-account">
-                                    <h4 className="profile-card-header">Eliminar tu Cuenta</h4>
-                                    <p>Cuando elimine su cuenta, perderá el acceso a los servicios de la cuenta y borraremos permanentemente sus datos personales. Puedes cancelar la eliminación durante 14 días.</p>
-                                    <div className="form-check">
-                                        <input type="checkbox" className="form-check-input" id="deleteAccountCheckbox" />
-                                        <label className="form-check-label" htmlFor="deleteAccountCheckbox" required>Confirmo que deseo eliminar mi cuenta en Yay</label>
-                                    </div>
-                                    <div className="form-actions text-end">
-                                        <button type="submit" className="btn btn-danger" onClick={() => setShowDeleteConfirm(true)}>Eliminar</button>
-                                    </div>
-                                </div>
                             </>
                         )}
 
@@ -564,14 +561,27 @@ export const Perfil_Usuario = () => {
                         {activeSection === 'seguridad' && (
                             <div className="profile-card">
                                 <h2 className={styles.sectionTitle}>Seguridad</h2>
-                                <div className="form-group">
-                                    <label>Autenticación de dos factores</label>
-                                    <div>
+                                <div className="profile-card delete-account mt-5">
+                                    <h4 className="profile-card-header">Eliminar tu Cuenta</h4>
+                                    <p>Cuando elimines tu cuenta, perderás el acceso a los servicios de YAY y borraremos permanentemente sus datos personales. Puedes cancelar la eliminación de la cuenta si inicias sesión durante los primeros 14 días desde la solicitud.</p>
+                                    <div className="form-check">
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            id="deleteAccountCheckbox"
+                                            checked={deleteCheckboxChecked}
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <label className="form-check-label" htmlFor="deleteAccountCheckbox">Confirmo que deseo eliminar mi cuenta en Yay</label>
+                                    </div>
+                                    <div className="form-actions text-end">
                                         <button
-                                            className={`btn mt-3 ${isTwoFactorEnabled ? 'text-danger' : 'btn-success'}`}
-                                            onClick={toggleTwoFactor}
+                                            type="button"
+                                            className="btn btn-danger"
+                                            onClick={() => setShowDeleteConfirm(true)}
+                                            disabled={!deleteCheckboxChecked} 
                                         >
-                                            {isTwoFactorEnabled ? "Desactivar 2FA" : "Activar 2FA"}
+                                            Eliminar
                                         </button>
                                     </div>
                                 </div>
@@ -598,7 +608,39 @@ export const Perfil_Usuario = () => {
                     </section>
 
                 </div>
-
+                {showDeleteConfirm && (
+                <div className="modal show" style={{ display: 'block' }}>
+                    <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '600px' }}>
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Eliminar cuenta</h5>
+                                <button type="button" className="btn-close" onClick={() => setShowDeleteConfirm(false)} aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="d-flex align-items-start">
+                                    <i className="fa-solid fa-circle-exclamation fa-4x mx-2" style={{ color: '#7c488f' }}></i>
+                                    <div className="mx-3">
+                                        <h4 className="mb-0" style={{ color: '#7c488f' }}>Confirmar eliminación de cuenta</h4>
+                                        <hr className="mt-0 mb-1" />
+                                        <p>¿Estás seguro/a de que deseas eliminar tu cuenta? Esta acción es irreversible pasados 14 días.</p>
+                                    </div>
+                                </div>
+                                {showAlert && alertMessage && (
+                                    <div className={`alert alert-success alert-dismissible fade show`} role="alert">
+                                        <i className="fas fa-check me-2"></i>
+                                        {alertMessage}
+                                        <button type="button" className="btn-close" onClick={() => { setShowAlert(false); setAlertMessage(''); }} aria-label="Close"></button>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={() => setShowDeleteConfirm(false)}>Cancelar</button>
+                                <button type="button" className="btn text-white" style={{ backgroundColor: "#7c488f" }} onClick={confirmDeleteAccount}>Eliminar cuenta</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
             </main>
         </>
     );

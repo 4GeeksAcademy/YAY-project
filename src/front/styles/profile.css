@@ -103,3 +103,19 @@
         flex-wrap: wrap;
     }
 }
+
+.modal-dialog {
+    max-width: 80%; /* Ancho máximo en pantallas pequeñas */
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        max-width: 600px; /* Ancho máximo para pantallas medianas y más grandes */
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 90%; /* Ancho del modal en pantallas pequeñas */
+    }
+}
