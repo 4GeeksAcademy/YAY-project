@@ -44,3 +44,13 @@ h1, h2 {
     box-shadow: 0 0 0 0.2rem rgba(70, 69, 65, 0.5);
   }
 
+  input:focus,
+textarea:focus {
+    border: 1px solid #7c488f; 
+    outline: none; 
+}
+
+input {
+    border: 1px solid #ccc; 
+}
+

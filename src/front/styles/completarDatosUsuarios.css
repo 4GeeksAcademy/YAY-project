@@ -1,0 +1,125 @@
+.cd-container {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 100%; /* Permite que se ajuste a pantallas más pequeñas */
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cd-label {
+    max-width: 400px;
+    margin: 10px 0 5px;
+    font-size: 20px;
+}
+
+.cd-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+.cd-textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.cd-button {
+    background-color: #7c488f;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    height: fit-content;
+}
+
+.cd-button-remove {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.cd-interest-button {
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.cd-selected-button {
+    background-color: #444;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.cd-error {
+    color: red;
+}
+
+.cd-text-danger {
+    color: red;
+    padding-bottom: 20px;
+}
+
+.cd-mapa {
+    width: 800px; /* Ancho fijo para pantallas grandes */
+    height: 400px; /* Puedes ajustar la altura según necesites */
+    max-width: 100%; /* Se ajusta a pantallas más pequeñas */
+}
+
+/* Opcional: Para asegurarte de que los botones y otros elementos se adapten a pantallas pequeñas */
+@media (max-width: 600px) {
+    .cd-container {
+        padding: 15px; 
+    }
+
+    .cd-input,
+    .cd-textarea {
+        font-size: 18px; 
+    }
+
+    .cd-label {
+        font-size: 18px; 
+    }
+
+    .cd-button {
+        font-size: 14px; 
+        padding: 8px; 
+    }
+
+    .cd-error {
+        font-size: 12px; 
+    }
+}
