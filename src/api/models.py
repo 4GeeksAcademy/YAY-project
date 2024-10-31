@@ -105,7 +105,8 @@ class Eventos(db.Model):
             "observaciones": self.observaciones,
             "partner_id": self.partner_id,
             "partner_nombre": self.partner_nombre,
-            "interes_id": self.interes_id
+            "interes_id": self.interes_id,
+            "interes_nombre": self.interes.nombre if self.interes else None 
         }
 
 class Partners(db.Model):

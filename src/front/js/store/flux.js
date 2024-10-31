@@ -84,10 +84,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 return store.inscripcion_id; 
             },
 
-            exampleFunction: () => {
-                getActions().changeColor(0, "green");
-            },
-
             getPartnerIdFromToken(token) {
                 const decodedToken = jwtDecode(token);
                 return decodedToken.partner_id;
