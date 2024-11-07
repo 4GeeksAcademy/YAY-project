@@ -102,6 +102,7 @@
 .gradient-y-three-sm-primary {
     background-image: linear-gradient(transparent, rgb(88 73 137 / 13%) 50%, transparent);
 }
+
 /* -----------------------------------------------------------LANDING PAGE 1: HEADER--------------------------------------------------------------- */
 
 
@@ -136,15 +137,18 @@
     font-weight: 600;
     line-height: 1.2;
 }
+
 .display-3 {
     font-size: calc(1.200rem + 2.0vw);
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: 2px
 }
+
 .title-header {
     color: #494949 !important;
 }
+
 .h1,
 h1 {
     font-size: calc(1.375rem + 1.5vw);
@@ -250,12 +254,14 @@ svg {
 .card-imgagenLand {
     width: 100%;
     max-width: 300px;
-    
+
 }
 
 .no-hover:hover {
-    filter: none; /* o cualquier otro filtro o efecto que quieras eliminar */
-    transform: none; /* quita cualquier transformación */
+    filter: none;
+    /* o cualquier otro filtro o efecto que quieras eliminar */
+    transform: none;
+    /* quita cualquier transformación */
 }
 
 
@@ -268,12 +274,22 @@ svg {
     }
 }
 
+.landing-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
 .landing-card a {
     text-decoration: none;
 }
 
 .landing-card {
     border: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0.5rem;
 }
 
 
@@ -292,16 +308,16 @@ small {
 }
 
 .imgLand {
-    width: 100%;          
-    height: 200px;   
-    overflow: hidden;  
-  }
-  
-  .imgLand {
-    width: 100%;   
-    height: 100%;    
-    object-fit: cover;   
-  }
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.imgLand {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .list-separator .list-inline-item:not(:last-child) {
     padding-right: 2rem;
@@ -335,10 +351,12 @@ small {
     transform: translateY(20px);
     transition: opacity 1.5s, transform 1.5s;
     box-shadow: 0 .1875rem .375rem 0 rgba(140, 152, 164, .25);
-    width: 100%; /* Ancho completo de la tarjeta */
-    max-width: 300px; /* Ancho máximo para la tarjeta */
-    margin: 15px; 
-    
+    width: 100%;
+    /* Ancho completo de la tarjeta */
+    max-width: 300px;
+    /* Ancho máximo para la tarjeta */
+    margin: 15px;
+
 
 }
 
@@ -372,8 +390,14 @@ small {
         padding-bottom: 7.5rem !important;
     }
 }
+
 @media (min-width: 1200px) {
-    .container, .container-lg, .container-md, .container-sm, .container-xl {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
         max-width: 1140px;
     }
 }
@@ -389,7 +413,6 @@ small {
     width: 3.125rem;
     height: 3.125rem;
     color: #7c488f
-
 }
 
 .image-about {
@@ -400,6 +423,7 @@ small {
     height: 100%;
     z-index: -1;
 }
+
 @media (min-width: 768px) {
     .d-md-block {
         display: block !important;
@@ -433,6 +457,7 @@ small {
 .nav-segment:not(.nav-fill) {
     display: inline-flex;
 }
+
 .nav-segment {
     position: relative;
     background-color: #f8fafd;
@@ -458,12 +483,14 @@ small {
     background-color: #fff;
     box-shadow: 0 .1875rem .375rem 0 rgba(140, 152, 164, .25);
 }
+
 .nav-segment .nav-link {
     color: #7c488f;
     font-size: .875rem;
     padding: .5rem 1rem;
     border-radius: .5rem;
 }
+
 .nav-link.active {
     color: #4b2b57;
 }
@@ -498,11 +525,14 @@ input {
 }
 
 input:hover {
-    box-shadow: none !important; /* Quita la sombra por defecto */
+    box-shadow: none !important;
+    /* Quita la sombra por defecto */
 }
 
-input:focus, textarea:focus {
-    box-shadow: none !important; /* Quita la sombra en el estado de focus */
+input:focus,
+textarea:focus {
+    box-shadow: none !important;
+    /* Quita la sombra en el estado de focus */
     border-color: #7c488f !important;
 }
 
@@ -525,34 +555,39 @@ input:focus, textarea:focus {
     border-radius: 50%;
     transition: .3s ease-out;
 }
+
 .fadeInUp {
     animation-name: fadeInUp;
 }
+
 .animated {
     animation-duration: 1s;
     animation-fill-mode: both;
 }
+
 .position-fixed {
     position: fixed !important;
 }
+
 a {
     text-decoration: none;
 }
 
 @keyframes fadeInUp {
-    
-0% {
-    opacity: 0;
-    transform: translate3d(0, 15px, 0);
+
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 15px, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }
 
-100% {
-    opacity: 1;
-    transform: none;
-}
-}
-
-.flecha-top:hover, .flecha-top:focu {
+.flecha-top:hover,
+.flecha-top:focu {
     color: #7c488f
 }
 
@@ -606,10 +641,12 @@ a {
 .list-inline-item:not(:last-child) {
     margin-right: .25rem;
 }
+
 .list-inline-item {
     display: inline-block;
 }
 
-h5, h4 {
+h5,
+h4 {
     font-weight: 350;
 }

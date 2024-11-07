@@ -60,7 +60,7 @@ export const Landing_Card = () => {
       </div>
       {/* End Title */}
 
-      <div className="row row-cols-1 flex-row row-cols-sm-2 row-cols-lg-3   mb-5">
+      <div className="row row-cols-1 flex-row row-cols-sm-2 row-cols-lg-3 landing-card-container mb-5">
 
         {Array.isArray(store.eventos) && store.eventos.slice(0, 6).map((evento) => (
           <div key={evento.id} className="col mb-3">
